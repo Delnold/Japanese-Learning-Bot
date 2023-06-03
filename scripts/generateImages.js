@@ -12,12 +12,12 @@ const katakanaPathFolder = "./images/katakana/letters/";
 const kanjiPathFolder = "./images/kanji/letters/";
 const canvasWidth = 200;
 const canvasHeight = 200;
-const fontPath = './images/font/SawarabiGothic-Regular.ttf';
+const fontPath = './images/font/NotoSansJP-Bold.ttf';
 const fontSize = 100;
 const fontColor = '#000000'; // Black
 
 // Register the font
-registerFont(fontPath, {family: 'SawarabiGothic-Regular'});
+registerFont(fontPath, {family: 'Noto Sans JP'});
 
 // Function to generate and save the image
 async function generateImage(Letter, imagePathFolder) {
@@ -26,7 +26,7 @@ async function generateImage(Letter, imagePathFolder) {
         const context = canvas.getContext('2d');
 
         // Set the font properties
-        context.font = `${fontSize}px 'SawarabiGothic-Regular'`;
+        context.font = `${fontSize}px 'Noto Sans JP'`;
         context.fillStyle = fontColor;
         context.textAlign = 'center';
         context.textBaseline = 'middle';
