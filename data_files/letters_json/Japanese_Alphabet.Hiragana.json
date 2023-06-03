@@ -1,0 +1,511 @@
+[{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd84"
+  },
+  "character": "あ",
+  "english": "a"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd85"
+  },
+  "character": "い",
+  "english": "i"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd86"
+  },
+  "character": "う",
+  "english": "u"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd87"
+  },
+  "character": "え",
+  "english": "e"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd88"
+  },
+  "character": "お",
+  "english": "o"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd89"
+  },
+  "character": "か",
+  "english": "ka"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd8a"
+  },
+  "character": "が",
+  "english": "ga"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd8b"
+  },
+  "character": "き",
+  "english": "ki"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd8c"
+  },
+  "character": "ぎ",
+  "english": "gi"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd8d"
+  },
+  "character": "く",
+  "english": "ku"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd8e"
+  },
+  "character": "ぐ",
+  "english": "gu"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd8f"
+  },
+  "character": "け",
+  "english": "ke"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd90"
+  },
+  "character": "げ",
+  "english": "ge"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd91"
+  },
+  "character": "こ",
+  "english": "ko"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd92"
+  },
+  "character": "ご",
+  "english": "go"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd93"
+  },
+  "character": "さ",
+  "english": "sa"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd94"
+  },
+  "character": "ざ",
+  "english": "za"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd95"
+  },
+  "character": "し",
+  "english": "shi"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd96"
+  },
+  "character": "じ",
+  "english": "ji"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd97"
+  },
+  "character": "す",
+  "english": "su"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd98"
+  },
+  "character": "ず",
+  "english": "zu"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd99"
+  },
+  "character": "せ",
+  "english": "se"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd9a"
+  },
+  "character": "ぜ",
+  "english": "ze"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd9b"
+  },
+  "character": "そ",
+  "english": "so"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd9c"
+  },
+  "character": "ぞ",
+  "english": "zo"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd9d"
+  },
+  "character": "た",
+  "english": "ta"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd9e"
+  },
+  "character": "だ",
+  "english": "da"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cd9f"
+  },
+  "character": "ち",
+  "english": "chi"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cda0"
+  },
+  "character": "ぢ",
+  "english": "ji"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cda1"
+  },
+  "character": "つ",
+  "english": "tsu"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cda2"
+  },
+  "character": "づ",
+  "english": "zu"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cda3"
+  },
+  "character": "て",
+  "english": "te"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cda4"
+  },
+  "character": "で",
+  "english": "de"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cda5"
+  },
+  "character": "と",
+  "english": "to"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cda6"
+  },
+  "character": "ど",
+  "english": "do"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cda7"
+  },
+  "character": "な",
+  "english": "na"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cda8"
+  },
+  "character": "に",
+  "english": "ni"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cda9"
+  },
+  "character": "ぬ",
+  "english": "nu"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdaa"
+  },
+  "character": "ね",
+  "english": "ne"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdab"
+  },
+  "character": "の",
+  "english": "no"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdac"
+  },
+  "character": "は",
+  "english": "ha"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdad"
+  },
+  "character": "ば",
+  "english": "ba"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdae"
+  },
+  "character": "ぱ",
+  "english": "pa"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdaf"
+  },
+  "character": "ひ",
+  "english": "hi"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdb0"
+  },
+  "character": "び",
+  "english": "bi"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdb1"
+  },
+  "character": "ぴ",
+  "english": "pi"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdb2"
+  },
+  "character": "ふ",
+  "english": "fu"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdb3"
+  },
+  "character": "ぶ",
+  "english": "bu"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdb4"
+  },
+  "character": "ぷ",
+  "english": "pu"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdb5"
+  },
+  "character": "へ",
+  "english": "he"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdb6"
+  },
+  "character": "べ",
+  "english": "be"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdb7"
+  },
+  "character": "ぺ",
+  "english": "pe"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdb8"
+  },
+  "character": "ほ",
+  "english": "ho"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdb9"
+  },
+  "character": "ぼ",
+  "english": "bo"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdba"
+  },
+  "character": "ぽ",
+  "english": "po"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdbb"
+  },
+  "character": "ま",
+  "english": "ma"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdbc"
+  },
+  "character": "み",
+  "english": "mi"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdbd"
+  },
+  "character": "む",
+  "english": "mu"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdbe"
+  },
+  "character": "め",
+  "english": "me"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdbf"
+  },
+  "character": "も",
+  "english": "mo"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdc0"
+  },
+  "character": "や",
+  "english": "ya"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdc1"
+  },
+  "character": "ゆ",
+  "english": "yu"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdc2"
+  },
+  "character": "よ",
+  "english": "yo"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdc3"
+  },
+  "character": "ら",
+  "english": "ra"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdc4"
+  },
+  "character": "り",
+  "english": "ri"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdc5"
+  },
+  "character": "る",
+  "english": "ru"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdc6"
+  },
+  "character": "れ",
+  "english": "re"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdc7"
+  },
+  "character": "ろ",
+  "english": "ro"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdc8"
+  },
+  "character": "わ",
+  "english": "wa"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdc9"
+  },
+  "character": "ゐ",
+  "english": "wi"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdca"
+  },
+  "character": "ゑ",
+  "english": "we"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdcb"
+  },
+  "character": "を",
+  "english": "wo"
+},
+{
+  "_id": {
+    "$oid": "647ae9c74b4c691bcdd2cdcc"
+  },
+  "character": "ん",
+  "english": "n"
+}]
