@@ -1,12 +1,10 @@
 class DBJapaneseAlphabet {
-    constructor() {
-        this.dbName = "Japanese_Alphabet";
-    }
-  async retrieveRandomCharacters(db, count, collectionName) {
+
+  static async retrieveRandomCharacters(client, count, collectionName) {
     try {
-      const db = await db.db(this.dbName)
+      const db = await client.db("Japanese_Alphabet");
       const collection = await db.collection(collectionName);
-        return await collection.aggregate([{$sample: {size: count}}]).toArray();
+      return await collection.aggregate([{ $sample: { size: count } }]).toArray();
     } catch (error) {
       console.error("Error retrieving random Hiragana:", error);
     }
