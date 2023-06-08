@@ -1,55 +1,52 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import {createCanvas, registerFont} from 'canvas';
 import DBMain from "../DBContext/DBMain.js";
 import {dbConnectionString} from "../config/config.js";
-const dbName = "Japanese_Alphabet";
-const collectionHiraganaName = "Hiragana";
-const collectionKatakanaName = "Katakana";
-const collectionKanjiName = "Kanji";
-const hiraganaPathFolder = "./images/hiragana/letters/";
-const katakanaPathFolder = "./images/katakana/letters/";
-const kanjiPathFolder = "./images/kanji/letters/";
+import {dbName} from "../config/config.js";
+import {collectionHiraganaName} from "../config/config.js";
+import {collectionKatakanaName} from "../config/config.js";
+import {collectionKanjiName} from "../config/config.js";
+const hiraganaPathFolder = "./data_files/images/hiragana/letters/";
+const katakanaPathFolder = "./data_files/images/katakana/letters/";
+const kanjiPathFolder = "./data_files/images/kanji/letters/";
 const canvasWidth = 200;
 const canvasHeight = 200;
-const fontPath = './images/font/NotoSansJP-Bold.ttf';
+const fontPath = './data_files/images/font/NotoSansJP-Bold.ttf';
 const fontSize = 100;
 const fontColor = '#000000'; // Black
 
 registerFont(fontPath, {family: 'Noto Sans JP'});
 
 async function generateImage(Letter, imagePathFolder) {
-    return new Promise((resolve, reject) => {
-        const path = `${imagePathFolder}${Letter}.png`;
-        fs.access(path, fs.F_OK, (error) => {
-            if (error) {
-                const canvas = createCanvas(canvasWidth, canvasHeight);
-                const context = canvas.getContext('2d');
+  const path = `${imagePathFolder}${Letter}.png`;
 
-                context.font = `${fontSize}px 'Noto Sans JP'`;
-                context.fillStyle = fontColor;
-                context.textAlign = 'center';
-                context.textBaseline = 'middle';
+  try {
+    await fs.access(path);
+    return `File: ${Letter}.png exists!`;
+  } catch (error) {
+    const canvasWidth = 100;
+    const canvasHeight = 100;
+    const fontSize = 20;
+    const fontColor = 'black';
 
-                const x = canvasWidth / 2;
-                const y = canvasHeight / 2;
+    const canvas = createCanvas(canvasWidth, canvasHeight);
+    const context = canvas.getContext('2d');
 
-                context.fillText(Letter, x, y);
+    context.font = `${fontSize}px 'Noto Sans JP'`;
+    context.fillStyle = fontColor;
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
 
-                const imageBuffer = canvas.toBuffer();
-                fs.writeFile(path, imageBuffer, (error) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        resolve(path);
-                    }
-                });
-            } else {
-                resolve(`File: ${Letter}.png exists!`);
-            }
-        });
-    });
+    const x = canvasWidth / 2;
+    const y = canvasHeight / 2;
+
+    context.fillText(Letter, x, y);
+
+    const imageBuffer = canvas.toBuffer();
+    await fs.writeFile(path, imageBuffer);
+    return path;
+  }
 }
-
 
 const generateLetterImages = async (db, dbName, PathFolder, collectionName) => {
     try {
@@ -66,7 +63,6 @@ const generateLetterImages = async (db, dbName, PathFolder, collectionName) => {
             promises.push(promise);
         }
         await Promise.all(promises);
-
         return "Success!";
     } catch (error) {
         console.log(`Error creating Letter Images: ${error}`);
