@@ -1,1 +1,1 @@
-import bot from "./BotCommands/BotMain.js";
+import bot from "./bot/bot.js";

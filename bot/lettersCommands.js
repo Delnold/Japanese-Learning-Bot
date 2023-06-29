@@ -1,12 +1,8 @@
-import fs from "fs";
-
-const random_characters = async (msg, bot, dbInstance, DBJapaneseAlphabet, collectionName, count = 5) => {
+const randomCharacters = async (msg, bot, dbJapaneseAlphabet, collectionName, count = 5) => {
     try {
         let correctGuesses = 0;
-        await dbInstance.openConnection();
-        const clientDB = dbInstance.client
-        const array_letters = await DBJapaneseAlphabet.retrieveRandomCharacters(clientDB, count, collectionName);
-        for (const info of array_letters) {
+        const arrayLetters = await dbJapaneseAlphabet.retrieveRandomCharacters(count, collectionName);
+        for (const info of arrayLetters) {
             await bot.sendMessage(msg.chat.id, "English representative of this character: " + info["character"]);
 
             const responseMsg = await new Promise((resolve) => {
@@ -16,12 +12,14 @@ const random_characters = async (msg, bot, dbInstance, DBJapaneseAlphabet, colle
                     }
                 });
             });
-
-            if (responseMsg.text === info["english"]) {
+            if (responseMsg.text.includes("/")){
+                return
+            }
+            if (responseMsg.text.toLowerCase() === info["english"]) {
                 await bot.sendMessage(msg.chat.id, "Correct!");
                 correctGuesses++;
             } else {
-                await bot.sendMessage(msg.chat.id, "Incorrect!");
+                await bot.sendMessage(msg.chat.id, `Incorrect! Correct answer: ${info["english"]}`);
             }
 
             console.log("User responded!", msg.chat.id);
@@ -33,8 +31,6 @@ const random_characters = async (msg, bot, dbInstance, DBJapaneseAlphabet, colle
         console.log("User: " + msg.chat.id, "Test over! You got " + correctGuesses + " correct answer(s).")
     } catch (err) {
         console.log("Error:", err);
-    } finally {
-        await dbInstance.closeConnection();
     }
 };
 
@@ -64,4 +60,4 @@ const random_characters = async (msg, bot, dbInstance, DBJapaneseAlphabet, colle
 //         }
 //     });
 // });
-export default random_characters;
+export default randomCharacters;

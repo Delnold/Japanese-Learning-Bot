@@ -1,17 +1,15 @@
 import fs from 'fs/promises';
 import {createCanvas, registerFont} from 'canvas';
-import DBMain from "../DBContext/DBMain.js";
-import {dbConnectionString} from "../config/config.js";
-import {dbName} from "../config/config.js";
-import {collectionHiraganaName} from "../config/config.js";
-import {collectionKatakanaName} from "../config/config.js";
-import {collectionKanjiName} from "../config/config.js";
-const hiraganaPathFolder = "./data_files/images/hiragana/letters/";
-const katakanaPathFolder = "./data_files/images/katakana/letters/";
-const kanjiPathFolder = "./data_files/images/kanji/letters/";
+import dbJpAlphabet from "../core/dbMongoConnections.js";
+import {collectionKanjiName, collectionKatakanaName, collectionHiraganaName} from "../core/config.js";
+
+const hiraganaPathFolder = "./data/images/hiragana/letters/";
+const katakanaPathFolder = "./data/images/katakana/letters/";
+const kanjiPathFolder = "./data/images/kanji/letters/";
+
 const canvasWidth = 200;
 const canvasHeight = 200;
-const fontPath = './data_files/images/font/NotoSansJP-Bold.ttf';
+const fontPath = './data/images/font/NotoSansJP-Bold.ttf';
 const fontSize = 100;
 const fontColor = '#000000'; // Black
 
@@ -24,11 +22,6 @@ async function generateImage(Letter, imagePathFolder) {
     await fs.access(path);
     return `File: ${Letter}.png exists!`;
   } catch (error) {
-    const canvasWidth = 100;
-    const canvasHeight = 100;
-    const fontSize = 20;
-    const fontColor = 'black';
-
     const canvas = createCanvas(canvasWidth, canvasHeight);
     const context = canvas.getContext('2d');
 
@@ -48,11 +41,9 @@ async function generateImage(Letter, imagePathFolder) {
   }
 }
 
-const generateLetterImages = async (db, dbName, PathFolder, collectionName) => {
+const generateLetterImages = async (db, PathFolder, collectionName) => {
     try {
-        await db.openConnection();
-        const dbMain = db.client.db(dbName);
-        const collection = dbMain.collection(collectionName);
+        const collection = db.collection(collectionName);
         const cursor = collection.find({});
         const promises = [];
 
@@ -66,21 +57,15 @@ const generateLetterImages = async (db, dbName, PathFolder, collectionName) => {
         return "Success!";
     } catch (error) {
         console.log(`Error creating Letter Images: ${error}`);
-    } finally {
-        await db.closeConnection();
     }
 };
 
 (async () => {
     try {
-        const dbContextManager1 = new DBMain(dbConnectionString);
-        const dbContextManager2 = new DBMain(dbConnectionString);
-        const dbContextManager3 = new DBMain(dbConnectionString);
-
         await Promise.all([
-            generateLetterImages(dbContextManager1, dbName, hiraganaPathFolder, collectionHiraganaName),
-            generateLetterImages(dbContextManager2, dbName, katakanaPathFolder, collectionKatakanaName),
-            generateLetterImages(dbContextManager3, dbName, kanjiPathFolder, collectionKanjiName)
+            generateLetterImages(dbJpAlphabet, hiraganaPathFolder, collectionHiraganaName),
+            generateLetterImages(dbJpAlphabet, katakanaPathFolder, collectionKatakanaName),
+            generateLetterImages(dbJpAlphabet, kanjiPathFolder, collectionKanjiName)
         ]);
     } catch (error) {
         console.log(`Error generating letter images: ${error}`);
