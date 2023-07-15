@@ -52,7 +52,6 @@ class DBLevelCache {
             });
             return true;
         } catch (err) {
-            console.log(`The activity is empty! ${err}`);
             return false;
         }
     }

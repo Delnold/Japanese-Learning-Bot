@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import {createCanvas, registerFont} from 'canvas';
-import dbJpAlphabet from "../core/dbMongoConnections.js";
+import {dbJpAlphabet} from "../core/dbMongoConnections.js";
 import {collectionKanjiName, collectionKatakanaName, collectionHiraganaName} from "../core/config.js";
 
 const hiraganaPathFolder = "./data/images/hiragana/letters/";

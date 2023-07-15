@@ -12,10 +12,12 @@ class DBJapaneseAlphabet {
         }
     }
 
-    async retrieveInfoCharacters(arrayLetters, collectionName) {
+    async retrieveInfoCharacter(kanjiAbout, collectionName) {
         try {
+            console.log(kanjiAbout)
             const collection = await this.db.collection(collectionName);
-            return await collection.find({character: {$in: arrayLetters}}).toArray()
+            console.log(await collection.findOne({character: kanjiAbout}))
+            return await collection.findOne({character: kanjiAbout})
 
         } catch (error) {
             console.error(`Error retrieving info of ${collectionName} characters:`, error);

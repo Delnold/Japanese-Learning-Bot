@@ -1,10 +1,23 @@
-const kanjiInfo = async (msg, match, bot, dbJapaneseAlphabet, collectionKanjiName) => {
+import formatKanjiInfo from "../markup/formattedData/kanjiFormatted.js"
+import openPhotoAsync from "../utilities/fileCommands.js";
+import {kanjiPathFolder} from "../core/filePaths.js";
+
+const kanjiInfo = async (msg, bot, dbJapaneseAlphabet, collectionKanjiName) => {
     try {
-        const arrayElements = [...new Set(match[1].split(''))];
-        const array_letters = await dbJapaneseAlphabet.retrieveInfoCharacters(arrayElements, collectionKanjiName);
-        for (const info of array_letters) {
-            await bot.sendMessage(msg.chat.id, [info["jlpt_new"], info["readings_on"]].toString());
-        }
+        const userID = msg.chat.id
+        await bot.sendMessage(userID, "Please provide me with a Kanji character you would like to get information about");
+        const kanjiAbout = await new Promise((resolve) => {
+            bot.onText(/.*/, (response) => {
+                if (response.chat.id === userID) {
+                    resolve(response.text);
+                }
+            });
+        });
+        const kanjiResult = await dbJapaneseAlphabet.retrieveInfoCharacter(kanjiAbout, collectionKanjiName);
+        const kanjiName = kanjiResult.character
+        const kanjiPhoto = await openPhotoAsync(kanjiPathFolder + kanjiName + ".png")
+        const kanjiFormatted = await formatKanjiInfo(kanjiResult)
+        await bot.sendPhoto(userID, kanjiPhoto, {caption: kanjiFormatted, parse_mode: 'Markdown'})
     } catch (err) {
         console.log("Error:", err);
     }

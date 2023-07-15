@@ -1,5 +1,24 @@
-const randomCharacters = async (msg, bot, dbJapaneseAlphabet, collectionName, count = 5) => {
+import { katakanaMnemonicChart, hiraganaMnemonicChart} from "../markup/commandsNaming/toolsNaming.js"
+import {collectionHiraganaName, collectionKatakanaName} from "../core/config.js";
+import {hiraganaPrac, katakanaPrac} from "../markup/commandsNaming/practisingNaming.js"
+import {
+    mnemonicChartsHiraganaPathFolder,
+    mnemonicChartsKatakanaPathFolder
+} from "../core/filePaths.js";
+import openPhotoAsync from "../utilities/fileCommands.js";
+import path from "path";
+
+const randomCharacters = async (msg, bot, dbJapaneseAlphabet, count = 5) => {
     try {
+        let collectionName;
+        switch (msg.text) {
+            case hiraganaPrac:
+                collectionName = collectionHiraganaName
+                break
+            case katakanaPrac:
+                collectionName = collectionKatakanaName
+
+        }
         let correctGuesses = 0;
         const arrayLetters = await dbJapaneseAlphabet.retrieveRandomCharacters(count, collectionName);
         for (const info of arrayLetters) {
@@ -12,7 +31,7 @@ const randomCharacters = async (msg, bot, dbJapaneseAlphabet, collectionName, co
                     }
                 });
             });
-            if (responseMsg.text.includes("/")){
+            if (responseMsg.text.includes("/")) {
                 return
             }
             if (responseMsg.text.toLowerCase() === info["english"]) {
@@ -33,31 +52,25 @@ const randomCharacters = async (msg, bot, dbJapaneseAlphabet, collectionName, co
         console.log("Error:", err);
     }
 };
+const mnemonicCharts = async (msg, bot) => {
+    try {
+        let pathChart;
+        console.log(msg.text)
+        switch (msg.text) {
+            case hiraganaMnemonicChart:
+                pathChart = mnemonicChartsHiraganaPathFolder
+                break
+            case katakanaMnemonicChart:
+                pathChart = mnemonicChartsKatakanaPathFolder
+                break
 
-// bot.on('message', async (msg) => {
-//     const chatId = msg.chat.id
-//     const message = msg.text
-//     const pathFile = `./images/hiragana/letters/${message}.png`;
-//
-//     fs.access(pathFile, fs.F_OK, (accessError) => {
-//         if (accessError) {
-//             console.log(accessError)
-//             bot.sendMessage(chatId, "Photo can't be uploaded!");
-//         } else {
-//             fs.readFile(pathFile, (readError, imageBuffer) => {
-//                 if (readError) {
-//                     bot.sendMessage(chatId, "Failed to read the image file!");
-//                 } else {
-//                     bot.sendPhoto(chatId, imageBuffer, {caption: "Here is the photo!"})
-//                         .then(() => {
-//                             console.log("Photo sent successfully!");
-//                         })
-//                         .catch((sendError) => {
-//                             console.error("Failed to send photo:", sendError);
-//                         });
-//                 }
-//             });
-//         }
-//     });
-// });
-export default randomCharacters;
+        }
+        const fileName = path.basename(pathChart)
+        const chartPhoto = await openPhotoAsync(pathChart)
+        await bot.sendDocument(msg.chat.id, chartPhoto, {caption: "Chart is here!"},{filename: fileName, contentType: 'image/png'} )
+    }catch (err) {
+        console.log("Error:", err);
+    }
+}
+
+export {randomCharacters, mnemonicCharts};
