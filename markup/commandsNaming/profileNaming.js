@@ -1,12 +1,17 @@
-const hiraganaSettingsTime = 'ひらがな Time Limit'
+const profileNaming = {
+    profileSettings: {
+        name: 'セッティング Settings'
+    },
+    katahira: {
+        katakana: {
+            countLimit: 'カタカナ Count Limit',
+            timeLimit: 'カタカナ Time Limit'
+        },
+        hiragana: {
+            countLimit: 'ひらがな Count Limit',
+            timeLimit: 'ひらがな Time Limit'
+        }
+    }
+}
 
-const settingsProfile = 'セッティング Settings'
-
-const katakanaSettingsTime = 'カタカナ Time Limit'
-
-const hiraganaSettingsCount = 'ひらがな Count Limit'
-
-const katakanaSettingsCount = 'カタカナ Count Limit'
-
-export {hiraganaSettingsCount, hiraganaSettingsTime,
-        katakanaSettingsCount, katakanaSettingsTime, settingsProfile}
+export {profileNaming}

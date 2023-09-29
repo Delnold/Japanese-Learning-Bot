@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: node.Dockerfile
+    container_name: nodejs
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    networks:
+      - app-network
+    command: ./docker-scripts/wait-for-it.sh db:27017 -t 60 -- node index.js
+
+  db:
+    image: mongo:6.0
+    container_name: db
+    restart: unless-stopped
+    volumes:
+      - ./data/dump:/db-dump
+      - ./docker-scripts/mongorestore.sh:/docker-entrypoint-initdb.d/mongorestore.sh
+      - mongodb-config:/data/configdb
+      - mongodb-data:/data/db
+    networks:
+      - app-network
+    ports:
+      - "27018:27017"
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  node_modules:
+  mongodb-data:
+  mongodb-config:

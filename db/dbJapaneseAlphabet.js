@@ -14,9 +14,7 @@ class DBJapaneseAlphabet {
 
     async retrieveInfoCharacter(kanjiAbout, collectionName) {
         try {
-            console.log(kanjiAbout)
             const collection = await this.db.collection(collectionName);
-            console.log(await collection.findOne({character: kanjiAbout}))
             return await collection.findOne({character: kanjiAbout})
 
         } catch (error) {

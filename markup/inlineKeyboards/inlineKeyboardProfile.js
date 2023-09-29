@@ -1,13 +1,13 @@
 import {backMenu} from "../commandsNaming/commandsNaming.js";
-import {hiraganaSettingsCount, katakanaSettingsCount, settingsProfile} from "../commandsNaming/profileNaming.js";
-import generateInlineKeyboardLetter from "../../utilities/generateInlineKeyboards.js";
-import {collectionHiraganaName, collectionKatakanaName} from "../../core/config.js";
+import {profileNaming} from "../commandsNaming/profileNaming.js";
+import {generateInlineKeyboardLetter} from "../../utilities/generateInlineKeyboards.js";
+import {collectionNames} from "../../core/config.js";
 const inlineKeyboardProfile = {
     parse_mode: 'Markdown',
     reply_markup: {
         inline_keyboard: [
             [
-                {text: settingsProfile, callback_data: settingsProfile},
+                {text: profileNaming.profileSettings.name, callback_data: profileNaming.profileSettings.name},
             ]
         ]
     },
@@ -21,8 +21,8 @@ const inlineKeyboardSettings = {
     reply_markup: {
         inline_keyboard: [
             [
-                {text: hiraganaSettingsCount, callback_data: hiraganaSettingsCount},
-                {text: katakanaSettingsCount, callback_data: katakanaSettingsCount}
+                {text: profileNaming.katahira.hiragana.countLimit, callback_data: profileNaming.katahira.hiragana.countLimit},
+                {text: profileNaming.katahira.katakana.countLimit, callback_data: profileNaming.katahira.katakana.countLimit}
             ],
             [
                 {text: backMenu, callback_data: backMenu}
@@ -55,8 +55,8 @@ const inlineKeyboardCount = {
     is_persistent: true,
 };
 
-const inlineKeyboardKatakanaCount = generateInlineKeyboardLetter(inlineKeyboardCount, collectionKatakanaName)
-const inlineKeyboardHiraganaCount = generateInlineKeyboardLetter(inlineKeyboardCount, collectionHiraganaName)
+const inlineKeyboardKatakanaCount = generateInlineKeyboardLetter(inlineKeyboardCount, collectionNames.katakana)
+const inlineKeyboardHiraganaCount = generateInlineKeyboardLetter(inlineKeyboardCount, collectionNames.hiragana)
 
 
 export {inlineKeyboardProfile, inlineKeyboardSettings,

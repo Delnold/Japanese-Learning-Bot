@@ -1,13 +1,29 @@
-const practisingMenu = '実践 Practising'
-const toolsMenu = '用具 Tools'
-const profileMenu = 'プロフィール Profile'
-const lessonsMenu = 'レッスン Lessons'
+const menuNaming = {
+    practisingMenu: {
+        name: '実践 Practising',
+        get RegEx() {
+            return new RegExp(this.name)
+        }
+    },
+    toolsMenu: {
+        name: '用具 Tools',
+        get RegEx() {
+            return new RegExp(this.name)
+        }
+    },
+    profileMenu: {
 
-const lessonsMenuRegEx = new RegExp(lessonsMenu)
-const profileMenuRegEx = new RegExp(profileMenu)
-const toolsMenuRegEx = new RegExp(toolsMenu)
-const practisingMenuRegEx = new RegExp(practisingMenu)
+        name: 'プロフィール Profile',
+        get RegEx() {
+            return new RegExp(this.name)
+        }
+    },
+    lessonsMenu: {
+        name: 'レッスン Lessons',
+        get RegEx() {
+            return new RegExp(this.name)
+        }
+    },
+}
 
-export {practisingMenuRegEx, toolsMenuRegEx, profileMenuRegEx,
-        practisingMenu, toolsMenu, profileMenu, lessonsMenu,
-        lessonsMenuRegEx}
+export {menuNaming};

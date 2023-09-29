@@ -1,10 +1,10 @@
 import {backMenu} from "../commandsNaming/commandsNaming.js";
-import {hiraganaPrac, katakanaPrac} from "../commandsNaming/practisingNaming.js";
+import {practiseNaming} from "../commandsNaming/practiseNaming.js";
 
 const selectKeyboardTraining = {
     parse_mode: 'Markdown',
     reply_markup: {
-         keyboard: [[katakanaPrac, hiraganaPrac], [backMenu]],
+         keyboard: [[practiseNaming.katahira.katakana.name, practiseNaming.katahira.hiragana.name], [backMenu]],
             resize_keyboard: true,
             one_time_keyboard: true,
             is_persistent: true

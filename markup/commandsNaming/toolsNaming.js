@@ -1,10 +1,21 @@
-const katakanaMnemonicChart = 'カタカナ Mnemonic Chart'
-const hiraganaMnemonicChart = 'ひらがな Mnemonic Chart'
-const kanjiInfo = '漢字 Kanji Info'
+const toolsNaming = {
+    kanjiInfo: {
+      name: '漢字 Kanji Info',
+      get RegEx(){
+          return new RegExp(this.name)
+      }
+    },
+    katahira: {
+        katakanaMnemonicChart: {
+            name: 'カタカナ Mnemonic Chart',
+        },
+        hiraganaMnemonicChart: {
+            name: 'ひらがな Mnemonic Chart'
+        },
+        get RegEx(){
+            return new RegExp(this.katakanaMnemonicChart.name + "|" + this.hiraganaMnemonicChart.name)
+        }
+    }
+}
 
-const kanjiInfoRegEx = new RegExp(kanjiInfo)
-const katahiraMnemonicChartRegEx = new RegExp(katakanaMnemonicChart + "|" + hiraganaMnemonicChart)
-
-export {katakanaMnemonicChart, kanjiInfoRegEx,
-    katahiraMnemonicChartRegEx, hiraganaMnemonicChart,
-    kanjiInfo}
+export {toolsNaming}

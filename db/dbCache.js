@@ -1,37 +1,38 @@
-class DBLevelCache {
-    constructor(LevelCacheDB) {
-        this.db = LevelCacheDB
+class DBMongoCache {
+    constructor(MongoCacheDB) {
+        this.db = MongoCacheDB
     }
 
-    async addUserActivity(userID, userCommand) {
+    async addUserActivity(activity, collectionName) {
         try {
-            await new Promise((resolve, reject) => {
-                this.db.put(userID, userCommand, function (err) {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(true);
-                    }
-                });
-            });
-            return true;
+            const collection = await this.db.collection(collectionName);
+            const insertResult = await collection.insertOne(activity);
+            return insertResult.insertedId.toString("hex")
         } catch (err) {
             console.log(`Error adding User activity! ${err}`);
             return false;
         }
     }
 
-    async deleteUserActivity(userID) {
+    async getUserActivity(dataActivity, collectionName) {
         try {
-            await new Promise((resolve, reject) => {
-                this.db.del(userID, function (err) {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(true);
-                    }
-                });
-            });
+            const collection = await this.db.collection(collectionName);
+            ;
+            const userActivity = await collection.findOne(dataActivity)
+            if (userActivity !== null) {
+                return userActivity;
+            }
+            return null
+        } catch (err) {
+            return false;
+        }
+    }
+
+
+    async deleteUserActivity(dataActivity, collectionName) {
+        try {
+            const collection = await this.db.collection(collectionName);
+            await collection.deleteOne(dataActivity);
             return true;
         } catch (err) {
             console.log(`Error deleting User activity! ${err}`);
@@ -39,19 +40,29 @@ class DBLevelCache {
         }
     }
 
-    async checkUserActivity(userID) {
+    async updateUserActivity(filter, dataToUpdate, collectionName) {
         try {
-            await new Promise((resolve, reject) => {
-                this.db.get(userID, function (err) {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(true);
-                    }
-                });
-            });
-            return true;
+            const collection = await this.db.collection(collectionName);
+            const updateResult = await collection.updateOne(filter, dataToUpdate)
+            if (updateResult.modifiedCount > 0) {
+                return true;
+            }
+            return false
         } catch (err) {
+            console.log(`Error updating User activity! ${err}`);
+            return false;
+        }
+    }
+
+    async checkUserActivity(checkActivity, collectionName) {
+        try {
+            const collection = await this.db.collection(collectionName);
+            if (await collection.findOne(checkActivity) !== null) {
+                return true;
+            }
+            return false
+        } catch (err) {
+            console.log(`Error checking User activity! ${err}`);
             return false;
         }
     }
@@ -59,4 +70,4 @@ class DBLevelCache {
 
 }
 
-export default DBLevelCache;
+export default DBMongoCache;

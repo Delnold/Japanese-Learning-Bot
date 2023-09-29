@@ -1,8 +1,7 @@
 import fs from 'fs/promises';
 import {createCanvas, registerFont} from 'canvas';
-import {dbJpAlphabet} from "../core/dbMongoConnections.js";
-import {collectionKanjiName, collectionKatakanaName, collectionHiraganaName} from "../core/config.js";
-
+import {collectionNames} from "../core/config.js";
+import {dbConnections} from "../core/dbMongoConnections.js";
 const hiraganaPathFolder = "./data/images/hiragana/letters/";
 const katakanaPathFolder = "./data/images/katakana/letters/";
 const kanjiPathFolder = "./data/images/kanji/letters/";
@@ -63,9 +62,9 @@ const generateLetterImages = async (db, PathFolder, collectionName) => {
 (async () => {
     try {
         await Promise.all([
-            generateLetterImages(dbJpAlphabet, hiraganaPathFolder, collectionHiraganaName),
-            generateLetterImages(dbJpAlphabet, katakanaPathFolder, collectionKatakanaName),
-            generateLetterImages(dbJpAlphabet, kanjiPathFolder, collectionKanjiName)
+            generateLetterImages(dbConnections.JpAlphabet, hiraganaPathFolder, collectionNames.hiragana),
+            generateLetterImages(dbConnections.JpAlphabet, katakanaPathFolder, collectionNames.katakana),
+            generateLetterImages(dbConnections.JpAlphabet, kanjiPathFolder, collectionNames.kanji)
         ]);
     } catch (error) {
         console.log(`Error generating letter images: ${error}`);

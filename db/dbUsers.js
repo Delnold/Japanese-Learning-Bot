@@ -1,5 +1,3 @@
-import {collectionTelegramName} from "../core/config.js";
-
 class DBUsers {
     constructor(usersDB, userAttributes = {}) {
         this.db = usersDB
@@ -51,16 +49,6 @@ class DBUsers {
         } catch
             (error) {
             console.error(`Error setting practise count!`);
-        }
-    }
-
-    async addNewAttributesToUsers(usersAttributes, collectionNameUsers) {
-        const usersCollection = this.db.collection(collectionNameUsers);
-        const users = await usersCollection.find().toArray();
-
-        for (const user of users) {
-            const updatedUser = {...user};
-            await usersCollection.updateOne({_id: user._id}, {$set: updatedUser});
         }
     }
 }
