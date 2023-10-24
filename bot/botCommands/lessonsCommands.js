@@ -3,7 +3,7 @@ import {collectionNames} from "../../core/config.js";
 import {generateInlineKeyboard} from "../../utilities/generateInlineKeyboards.js";
 import {JLPTAttributes, lessonsAttributes, levelsAttributes} from "../../utilities/generateLessonAttrsOptions.js";
 import lessonAttrs from "../../core/collectionAttributes/lessonAttributes.js";
-import formatLessonGrammar from "../../markup/formattedData/lessonFormatted.js";
+import {lessonFormatted} from "../../markup/formattedData/lessonFormatted.js";
 
 const lessonJLPT = async (msg, bot, dbLessons) => {
     const userID = msg.chat.id
@@ -27,9 +27,9 @@ const lessonJLPT = async (msg, bot, dbLessons) => {
             break
     }
     arrayOfJLPTAttributes = await
-                dbLessons.getUniqueJLPT(collectionName)
+        dbLessons.getUniqueJLPT(collectionName)
     arrayForInlineKeyboard = await JLPTAttributes(collectionName,
-                lessonAttrs.JLPT, arrayOfJLPTAttributes)
+        lessonAttrs.JLPT, arrayOfJLPTAttributes)
     inlineKeyboard = await generateInlineKeyboard(arrayForInlineKeyboard)
     await bot.sendMessage(userID, `Choose your ${collectionName} JLPT`, inlineKeyboard)
 }
@@ -71,7 +71,7 @@ const lessonNumber = async (msg, bot, dbLessons) => {
 
     const arrayOfLessonsAttributes = await dbLessons.getUniqueLessons(collectionName,
         JLPTAttributeValue, levelAttributeValue)
-    
+
 
     const arrayForInlineKeyboard = await lessonsAttributes(collectionName,
         lessonAttrs.JLPT, JLPTAttributeValue, lessonAttrs.level, levelAttributeValue,
@@ -90,7 +90,7 @@ const lessonChoice = async (msg, bot, dbLessons) => {
     const userID = msg.message.chat.id
     const messageID = msg.message.message_id
     const messageData = msg.data
-    let lessonFormatted;
+    let lessonText;
     // Grammar_JLPT_5_Level_23_Lesson_45
     const messageDataArr = messageData.split('_');
     let collectionName = messageDataArr[0]
@@ -101,17 +101,32 @@ const lessonChoice = async (msg, bot, dbLessons) => {
     const lesson = await dbLessons.getLesson(collectionName, JLPTAttributeValue, levelAttributeValue, lessonAttributeValue)
     switch (collectionName) {
         case collectionNames.grammar:
-            lessonFormatted = await formatLessonGrammar(lesson, lessonAttrs.meaning, lessonAttrs.usage, lessonAttrs.example)
+            lessonText = await lessonFormatted.Grammar(lesson, lessonAttrs.info, lessonAttrs.Grammar.meanings,
+                lessonAttrs.Grammar.usage, lessonAttrs.Grammar.examples)
             break
         case collectionNames.basics:
-        case collectionNames.vocabulary:
-        case collectionNames.kanji:
             break
+        case collectionNames.vocabulary:
+            lessonText = await lessonFormatted.Vocabulary(lesson, lessonAttrs.info,
+                lessonAttrs.Vocabulary.words,
+                lessonAttrs.Vocabulary.readings, lessonAttrs.Vocabulary.meanings,
+                lessonAttrs.Vocabulary.examples)
+            break
+        case collectionNames.kanji:
+            // This will be reduced to putting lessonAttrs.Grammar
+             lessonText = await lessonFormatted.Kanji(lesson, lessonAttrs.info, lessonAttrs.JLPT,
+                 lessonAttrs.Kanji.kanji, lessonAttrs.Kanji.reading, lessonAttrs.Kanji.meaning,
+                 lessonAttrs.Kanji.how_to_write, lessonAttrs.Kanji.origin_text,lessonAttrs.Kanji.origin_image,
+                 lessonAttrs.Kanji.development_image,lessonAttrs.Kanji.vocabulary, lessonAttrs.Kanji.examples )
     }
-    await bot.editMessageText(lessonFormatted, {
+    if (!lessonText){
+        lessonText = "The lesson is currently unavailable!"
+    }
+    await bot.editMessageText(lessonText, {
         chat_id: userID,
         message_id: messageID,
-        ...{parse_mode: 'Markdown'}
+        disable_web_page_preview: false,
+        parse_mode: 'Markdown'
     })
 
 }

@@ -84,6 +84,7 @@ bot.onText(menuNaming.toolsMenu.RegEx, async (msg) => {
 })
 bot.onText(toolsNaming.kanjiInfo.RegEx, async (msg) => {
     try {
+        console.log("Hello!")
         await processCommand(msg, bot, kanjiInfo, clientLock, dbMongoCache, collectionNames.commands, dbJapaneseAlphabet, collectionNames.kanji)
     } catch (err) {
         console.log(err)

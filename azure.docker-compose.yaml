@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  nodejs:
+    image: telegramjapanese.azurecr.io/nodejs-image:latest
+    container_name: nodejs
+    environment:
+      - NODE_ENV=development
+    restart: always
+    volumes:
+      - node-modules-azure:/home/node/app/node_modules
+      - docker-scripts:/home/node/app/docker-scripts
+      - mongo-restore:/home/node/app/data/dump
+    networks:
+      - app-network
+    command: ./docker-scripts/wait-for-it.sh db:27017 -t 60 -- node index.js
+
+  db:
+    image: telegramjapanese.azurecr.io/mongo-image:latest
+    container_name: db
+    restart: always
+    volumes:
+      - mongodb-config-azure:/data/configdb
+      - mongodb-data-azure:/data/db
+    networks:
+      - app-network
+    ports:
+      - "27017"
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  node-modules-azure:
+    driver: azure_file
+    driver_opts:
+      share_name: nodemodules
+      storage_account_name: delnolddata
+  mongodb-data-azure:
+    driver: azure_file
+    driver_opts:
+      share_name: mongodbdata
+      storage_account_name: delnolddata
+  mongodb-config-azure:
+    driver: azure_file
+    driver_opts:
+      share_name: mongodbconfig
+      storage_account_name: delnolddata

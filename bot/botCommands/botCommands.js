@@ -1,6 +1,5 @@
 import formatUserInfo from "../../markup/formattedData/userFormatted.js";
 import {collectionNames} from "../../core/config.js";
-
 import {inlineKeyboardProfile} from "../../markup/inlineKeyboards/inlineKeyboardProfile.js"
 import selectKeyboardStart from "../../markup/selectKeyboards/selectKeyboardStart.js";
 import selectKeyboardTraining from "../../markup/selectKeyboards/selectKeyboardTraining.js";

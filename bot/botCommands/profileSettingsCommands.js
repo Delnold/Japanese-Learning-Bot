@@ -1,13 +1,10 @@
 import {collectionNames} from "../../core/config.js";
-import {
-    inlineKeyboardHiraganaCount, inlineKeyboardKatakanaCount,
+import {inlineKeyboardHiraganaCount, inlineKeyboardKatakanaCount,
     inlineKeyboardProfile,
     inlineKeyboardSettings
 } from "../../markup/inlineKeyboards/inlineKeyboardProfile.js";
 import formatUserInfo from "../../markup/formattedData/userFormatted.js";
-import {
-    profileNaming
-} from "../../markup/commandsNaming/profileNaming.js";
+import {profileNaming} from "../../markup/commandsNaming/profileNaming.js";
 
 const userProfile = async (msg, bot, dbUsers) => {
     try {

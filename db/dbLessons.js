@@ -29,23 +29,25 @@ class DbLessons {
                     }
                 }, {
                     $group: {
+                        [this.idAttributeName]: `$${this.levelAttributeName}`,
+                        [this.levelAttributeName]: {
+                            $max: `$${this.levelAttributeName}`
+                        }
+                    }
+                }, {
+                    $sort: {
+                        [this.levelAttributeName]: 1
+                    }
+                },{
+                    $group: {
                         [this.idAttributeName]: null,
                         [this.levelAttributeName]: {
-                            $addToSet: `$${this.levelAttributeName}`
+                            $push: `$${this.levelAttributeName}`
                         }
                     }
                 }, {
                     $project: {
-                        [this.idAttributeName]: false,
-                        [this.levelAttributeName]: {
-                            $sortArray: {
-                                input: `$${this.levelAttributeName}`,
-                                sortBy: 1
-                            }
-                        }
-                    }
-                }, {
-                    $project: {
+                         [this.idAttributeName]: 0,
                         [this.levelAttributeName]: {
                             $slice:[
                                 `$${this.levelAttributeName}`, levelCount]
@@ -72,31 +74,26 @@ class DbLessons {
                         [this.JLPTAttributeName]: JLPTAttributeValue,
                         [this.levelAttributeName]: levelAttributeValue
                     }
+                },
+                {
+                    $sort: {
+                         [this.lessonAttributeName]: 1
+                    }
                 }, {
                     $group: {
                         [this.idAttributeName]: null,
                         [this.lessonAttributeName]: {
-                            $addToSet: `$${this.lessonAttributeName}`
+                            $push: `$${this.lessonAttributeName}`
                         },
                         [this.infoAttributeName]: {
-                            $addToSet: `$${this.infoAttributeName}`
+                            $push: `$${this.infoAttributeName}`
                         }
                     }
                 }, {
                     $project: {
                         [this.idAttributeName]: 0,
-                        [this.lessonAttributeName]: {
-                            $sortArray: {
-                                input: `$${this.lessonAttributeName}`,
-                                sortBy: 1
-                            }
-                        },
-                        [this.infoAttributeName]: {
-                            $sortArray: {
-                                input: `$${this.infoAttributeName}`,
-                                sortBy: 1
-                            }
-                        }
+                        [this.lessonAttributeName]: 1,
+                        [this.infoAttributeName]: 1
                     }
                 }
             ]

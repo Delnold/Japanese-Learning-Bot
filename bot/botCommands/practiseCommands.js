@@ -1,18 +1,9 @@
-import {
-    collectionNames
-} from "../../core/config.js";
-import {
-    practiseNaming
-} from "../../markup/commandsNaming/practiseNaming.js"
-import {
-    hiraganaPathFolder,
-    katakanaPathFolder,
-} from "../../core/filePaths.js";
+import {collectionNames} from "../../core/config.js";
+import {practiseNaming} from "../../markup/commandsNaming/practiseNaming.js"
+import {filePaths} from "../../core/filePaths.js";
 import openPhotoAsync from "../../utilities/fileCommands.js";
 import {settingsAttributeName} from "../../core/collectionAttributes/userAttributes.js";
-import {
-    generateInlineKeyboardLetterQuiz,
-} from "../../utilities/generateInlineKeyboards.js";
+import {generateInlineKeyboardLetterQuiz,} from "../../utilities/generateInlineKeyboards.js";
 import {getRandomInt} from "../../utilities/utils.js";
 import {ObjectId} from "mongodb";
 import letterQuizResults from "../../markup/formattedData/practiseFormatted.js";
@@ -27,12 +18,12 @@ const userLetterTest = async (msg, bot, dbJapaneseAlphabet, dbUsers, dbMongoCach
         switch (msg.text) {
             case practiseNaming.katahira.hiragana.name:
                 collectionName = collectionNames.hiragana
-                pathFolder = hiraganaPathFolder
+                pathFolder = filePaths.hiraganaPathFolder
                 collectionPrac = practiseNaming.katahira.hiragana.name
                 break
             case practiseNaming.katahira.katakana.name:
                 collectionName = collectionNames.katakana
-                pathFolder = katakanaPathFolder
+                pathFolder = filePaths.katakanaPathFolder
                 collectionPrac = practiseNaming.katahira.katakana.name
         }
 
@@ -70,11 +61,11 @@ const letterQuiz = async (msg, bot, dbJapaneseAlphabet, dbMongoCache) => {
         switch (collectionPrac) {
             case (practiseNaming.katahira.hiragana.name):
                 collectionName = collectionNames.hiragana
-                pathFolder = hiraganaPathFolder
+                pathFolder = filePaths.hiraganaPathFolder
                 break
             case (practiseNaming.katahira.katakana.name):
                 collectionName = collectionNames.katakana
-                pathFolder = katakanaPathFolder
+                pathFolder = filePaths.katakanaPathFolder
                 break
         }
         const dataActivity = {

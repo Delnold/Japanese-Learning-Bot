@@ -1,9 +1,5 @@
 import {toolsNaming} from "../../markup/commandsNaming/toolsNaming.js";
-import {
-    kanjiPathFolder,
-    mnemonicChartsHiraganaPathFolder,
-    mnemonicChartsKatakanaPathFolder
-} from "../../core/filePaths.js";
+import {filePaths} from "../../core/filePaths.js";
 import path from "path";
 import openPhotoAsync from "../../utilities/fileCommands.js";
 import formatKanjiInfo from "../../markup/formattedData/kanjiFormatted.js";
@@ -13,10 +9,10 @@ const mnemonicCharts = async (msg, bot) => {
         let pathChart;
         switch (msg.text) {
             case toolsNaming.katahira.hiraganaMnemonicChart.name:
-                pathChart = mnemonicChartsHiraganaPathFolder
+                pathChart = filePaths.mnemonicChartsHiraganaPathFolder
                 break
             case toolsNaming.katahira.katakanaMnemonicChart.name:
-                pathChart = mnemonicChartsKatakanaPathFolder
+                pathChart = filePaths.mnemonicChartsKatakanaPathFolder
                 break
 
         }
@@ -44,7 +40,7 @@ const kanjiInfo = async (msg, bot, dbJapaneseAlphabet, collectionKanjiName) => {
         });
         const kanjiResult = await dbJapaneseAlphabet.retrieveInfoCharacter(kanjiAbout, collectionKanjiName);
         const kanjiName = kanjiResult.character
-        const kanjiPhoto = await openPhotoAsync(`${kanjiPathFolder}${kanjiName}.png`)
+        const kanjiPhoto = await openPhotoAsync(`${filePaths.kanjiPathFolder}${kanjiName}.png`)
         const kanjiFormatted = await formatKanjiInfo(kanjiResult)
         await bot.sendPhoto(userID, kanjiPhoto, {caption: kanjiFormatted, parse_mode: 'Markdown'})
     } catch (err) {
