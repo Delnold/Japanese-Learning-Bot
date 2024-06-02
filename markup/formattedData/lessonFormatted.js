@@ -16,9 +16,20 @@ const lessonFormatted = {
 
         return infoText + contentText
     },
-    Basics: async function () {
-        
+    Basics: async function (japaneseData) {
+        const infoText = `*${japaneseData["info"]}*\n\n`;
+        let contentText = '';
 
+        const tips = japaneseData["tips_text"];
+        const letters = japaneseData["letters"];
+        const romajis = japaneseData["romajis"];
+
+        for (let i = 0; i < letters.length; i++) {
+            contentText += `${letters[i]} (${romajis[i]})\n`;
+            contentText += `*Tip:* ${tips[i][0]}\n*Example:* ${tips[i][1]}\n\n`;
+        }
+
+        return infoText + contentText;
     },
     Kanji: async function (japaneseData, infoAttributeName, JLPTAttributeName,
                            kanjiAttributeName, readingAttributeName,
@@ -33,23 +44,25 @@ const lessonFormatted = {
         const words = japaneseData[vocabularyAttributeName]
         const examples = japaneseData[examplesAttributeName]
 
-        if (japaneseData[JLPTAttributeName] === 5){
-            contentText += `Reading & Meaning of ${kanjis.join()}\n\n`
-            for (let i = 0; i < kanjis.length; i++) {
-            contentText += `${i+1}. ${kanjis[i]}  \nKunyomi: ${readings[0][i+1]}  \nOnyomi: ${readings[1][i+1]}  \nMeaning: ${meanings[i]}\n\n`
-            }
-            contentText += `Words of ${kanjis.join()}\n\n`
-            for (let i = 0; i < kanjis.length; i++) {
-            contentText += `${i+1}. ${kanjis[i]} \n${words[1][i+1].join("\n")}\n\n`
-            }
-            if (examples.length !== 0){
-                contentText += `Example Sentences of ${kanjis.join()}\n\n`
-                contentText += examples[0][0].join("\n")
-
-            }
+        contentText += `Reading & Meaning of ${kanjis.join()}\n\n`
+        for (let i = 0; i < kanjis.length; i++) {
+        contentText += `${i+1}. ${kanjis[i]}  \nKunyomi: ${readings[0][i+1]}  \nOnyomi: ${readings[1][i+1]}  \nMeaning: ${meanings[i]}\n\n`
         }
-        else{
-            return
+        try {
+
+
+            let temporary_text = `Words of ${kanjis.join()}\n\n`
+            for (let i = 0; i < kanjis.length; i++) {
+                temporary_text += `${i + 1}. ${kanjis[i]} \n${words[1][i + 1].join("\n")}\n\n`
+            }
+            contentText += temporary_text;
+        }catch (err){
+
+        }
+        if (examples.length !== 0){
+            contentText += `Example Sentences of ${kanjis.join()}\n\n`
+            contentText += examples[0][0].join("\n")
+
         }
 
         return infoText + contentText

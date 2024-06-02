@@ -105,6 +105,7 @@ const lessonChoice = async (msg, bot, dbLessons) => {
                 lessonAttrs.Grammar.usage, lessonAttrs.Grammar.examples)
             break
         case collectionNames.basics:
+            lessonText = await lessonFormatted.Basics(lesson)
             break
         case collectionNames.vocabulary:
             lessonText = await lessonFormatted.Vocabulary(lesson, lessonAttrs.info,
